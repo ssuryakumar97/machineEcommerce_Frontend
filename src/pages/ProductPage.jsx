@@ -6,11 +6,11 @@ import Newsletter from '../components/Newsletter'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { mobile } from '../responsive'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { BASE_URL, publicRequest } from '../requestMethods'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addProduct } from '../redux/cartRedux'
 
 const Container = styled.div``
@@ -70,7 +70,7 @@ const FilterColor = styled.div`
     margin: 0px 5px;
     cursor: pointer;
 `
-const FilterSize = styled.select`
+const FilterSize = styled.div`
     margin-left: 10px;
     padding: 5px;
 `
@@ -120,13 +120,18 @@ function ProductPage() {
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("");
     const [size, setSize] = useState("");
+    const [goToCart, setGoToCart] = useState(false)
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const {products: cartProduct} = useSelector((state) => state.cart)
+    console.log(cartProduct)
 
     useEffect(()=>{
         const getProduct = async () => {
             try{
                 const res =await publicRequest.get("/products/find/"+id)
-                console.log(res.data.color)
+                // console.log(res.data.color)
+                console.log(res.data)
                 setProduct(res.data)
                 
             } catch{
@@ -136,6 +141,15 @@ function ProductPage() {
         getProduct();
         
     }, [id])
+
+    useEffect(() => {
+        const filteredProduct = cartProduct.filter((val) => id == val._id)
+        if(filteredProduct[0]?._id == id) {
+            setGoToCart(true)
+        } else{
+            setGoToCart(false)
+        }
+    },[cartProduct])
     console.log(product)
 
     const handleQuantity = (type) =>{
@@ -147,7 +161,11 @@ function ProductPage() {
     }
     
     const handleClick = () => {
-        dispatch(addProduct({...product, quantity, color, size}))
+        dispatch(addProduct({...product, quantity, totalProductPrice: product.price * quantity}))
+    }
+
+    const handleGoToCart = () => {
+        navigate("/cart")
     }
 
   return (
@@ -159,9 +177,9 @@ function ProductPage() {
             <Image src={`${BASE_URL}/image/download/${product.img}`}/>
         </ImgContainer>
         <InfoContainer>
-            <Title>{product.title}</Title>
-            <Desc>{product.desc}</Desc>
-            <Price>Rs{product.price}Lakhs</Price>
+            <Title>{product?.title}</Title>
+            <Desc>{product?.desc}</Desc>
+            <Price>₹{product?.price}</Price>
             <FilterContainer>
                 {/* <Filter>
                     <FilterTitle>Color</FilterTitle>
@@ -171,24 +189,22 @@ function ProductPage() {
                 </Filter> */}
                 <Filter>
                     <FilterTitle>Size</FilterTitle>
-                    <FilterSize onChange={(e)=>setSize(e.target.value)}>    
-                        {product.size?.map((s) => (
-                            <FilterSizeOption key={s}>{s}</FilterSizeOption>
-                        ))}
-                    </FilterSize>
+                    <FilterSize>{product.size?.length > 0 && product.size[0].charAt(0).toUpperCase() + product.size[0].slice(1)}</FilterSize>
                 </Filter>
             </FilterContainer>
             <AddContainer>
-                <AmountContainer>
+                {!goToCart && <AmountContainer>
                     <RemoveIcon onClick={() => handleQuantity("dec")}/>
                     <Amount>{quantity}</Amount>
                     <AddIcon onClick={() => handleQuantity("inc")}/>
-                </AmountContainer>
-                <Button onClick={handleClick}>ADD TO CART</Button>
+                </AmountContainer>}
+                
+                {goToCart ? <Button onClick={handleGoToCart}>GO TO CART</Button>: <Button onClick={handleClick}>ADD TO CART</Button>}
+                {/* <Button onClick={handleClick}>ADD TO CART</Button> */}
             </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Newsletter/>
+      {/* <Newsletter/> */}
       <Footer/>
     </Container>
   )

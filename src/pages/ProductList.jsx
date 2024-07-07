@@ -53,22 +53,22 @@ function ProductList() {
     <Container>
       <Navbar/>
       <Announcement/>
-      <Title>{cat}</Title>
+      <Title>{cat.charAt(0).toLocaleUpperCase() + cat.slice(1)}</Title>
       <FilterContainer>
         <Filter>
             <FilterText>Filter Products:</FilterText>
-            <Select name='color' onChange={handleFilters}>
+            {/* <Select name='color' onChange={handleFilters}>
                 <Option disabled>Color</Option>
                 <Option>Red</Option>
                 <Option>Green</Option>
                 <Option>Blue</Option>
                 <Option>Yellow</Option>
-            </Select>
+            </Select> */}
             <Select name='size' onChange={handleFilters}>
                 <Option disabled selected>Machine capacity</Option>
-                <Option>Small</Option>
-                <Option>Medium</Option>
-                <Option>Large</Option>
+                <Option value="small">Small</Option>
+                <Option value="medium">Medium</Option>
+                <Option value="large">Large</Option>
             </Select>
         </Filter>
         <Filter>
@@ -81,7 +81,7 @@ function ProductList() {
         </Filter>
       </FilterContainer>
       <Products cat={cat} filters={filters} sort={sort} />
-      <Newsletter/>
+      {/* <Newsletter/> */}
       <Footer/>
     </Container>
   )

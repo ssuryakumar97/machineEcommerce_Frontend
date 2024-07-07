@@ -9,6 +9,7 @@ import ProductList from "./pages/ProductList";
 import ProductPage from "./pages/ProductPage";
 import Register from "./pages/Register";
 import {BrowserRouter as Router, Routes, Route, Navigate, Outlet} from "react-router-dom"
+import Orders from "./pages/Orders";
 
 
 const PrivateRoute = ({isAuthenticated}) => {
@@ -36,11 +37,14 @@ console.log(user)
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<PrivateRoute isAuthenticated={isUserAuthenticated}/>}>
               <Route path="/cart" element={<Cart />} />
+              <Route path="/products/:category" element={<ProductList />} />
+              <Route path="/product/:id" element={<ProductPage />} />
+              <Route path="/orders" element={<Orders />} />
             </Route>
             {/* <Route path="/" element={user ? <Navigate to="/" /> : <Login />} /> */}
-            <Route path="/products/:category" element={<ProductList />} />
+            {/* <Route path="/products/:category" element={<ProductList />} />
             <Route path="/product/:id" element={<ProductPage />} />
-            
+             */}
             
             <Route path="/pay" element={<Pay/>} /> {/*stripe*/}
             <Route path="/checkout" element={<CheckOut/>} /> {/*Razor pay*/}

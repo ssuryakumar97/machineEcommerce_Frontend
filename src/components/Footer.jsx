@@ -8,6 +8,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CallIcon from '@mui/icons-material/Call';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import { mobile } from '../responsive';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
     display: flex;
@@ -74,6 +75,10 @@ const ContactItem = styled.div`
 const Payment = styled.img`
     width: 50%;
 `
+const LinkItem = styled(Link)`
+    text-decoration: none;
+    color: black;
+`
 
  
 function Footer() {
@@ -100,15 +105,14 @@ function Footer() {
         <Center>
             <Title>Useful Links</Title>
             <List>
-                <ListItem>Home</ListItem>
-                <ListItem>Cart</ListItem>
-                <ListItem>Assembly machines</ListItem>
-                <ListItem>Processing Machines</ListItem>
-                <ListItem>Accessories</ListItem>
-                <ListItem>My Account</ListItem>
-                <ListItem>Order Tracking</ListItem>
-                <ListItem>Wishlist</ListItem>
-                <ListItem>Terms</ListItem>
+                <ListItem><LinkItem to="/" >Home</LinkItem></ListItem>
+                <ListItem><LinkItem to="/cart">Cart</LinkItem></ListItem>
+                <ListItem><LinkItem to="/products/assembly">Assembly machines</LinkItem></ListItem>
+                <ListItem><LinkItem to="/products/turning">Turning machines</LinkItem></ListItem>
+                <ListItem><LinkItem to="/products/moulding">Moulding Machines</LinkItem></ListItem>
+                <ListItem><LinkItem to="/products/welding">Welding Machines</LinkItem></ListItem>
+                <ListItem><LinkItem to="/products/accessories">Machine accessories</LinkItem></ListItem>                
+                <ListItem><LinkItem to="/orders">Order Tracking</LinkItem></ListItem> 
             </List>
         </Center>
         <Right>
@@ -116,7 +120,7 @@ function Footer() {
             <ContactItem><LocationOnIcon style={{marginRight: "10px"}}/>Ambathur, Chennai - 600 058</ContactItem>
             <ContactItem><CallIcon style={{marginRight: "10px"}}/>+91 44 2245 1124</ContactItem>
             <ContactItem><MailOutlineIcon style={{marginRight: "10px"}}/>contact@euler.in</ContactItem>
-            <Payment src='https://user-images.githubusercontent.com/52581/44384465-5e312780-a570-11e8-9336-7b54978a9e64.png'/>
+            {/* <Payment src='https://user-images.githubusercontent.com/52581/44384465-5e312780-a570-11e8-9336-7b54978a9e64.png'/> */}
 
         </Right>
     </Container>

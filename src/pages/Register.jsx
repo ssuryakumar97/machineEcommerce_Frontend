@@ -3,6 +3,7 @@ import { mobile } from "../responsive"
 import { useState } from "react"
 import { publicRequest } from "../requestMethods"
 import { Link, useNavigate } from "react-router-dom"
+import { toast, ToastContainer } from "react-toastify"
 
 const Container = styled.div`
     width:100vw;
@@ -75,6 +76,7 @@ function Register() {
   const [errorData, setErrorData] = useState("")
  
 
+  const navigate = useNavigate()
   const handleOnchange = (e) => {
     const object = {[e.target.name]: e.target.value}
     setUserData((val) => ({...val,...object }))
@@ -87,7 +89,10 @@ function Register() {
       try {
         const handleRegister = await publicRequest.post("/auth/register", userData)
       console.log(handleRegister.data)
+      // toast.success("Data registered successfully")
       setErrorData("")
+      setUserData(initialValues)
+      navigate('/login')
       } catch (error) {
         console.log(error.response.data.message)
         setError(true)
@@ -102,6 +107,7 @@ function Register() {
   console.log(userData)
   return (
     <Container>
+      {/* <ToastContainer autoClose={2000}/> */}
       <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
         <Form>

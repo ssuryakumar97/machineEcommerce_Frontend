@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { mobile } from '../responsive'
 import { login } from '../redux/apiCalls'
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from 'react-router-dom'
+
 
 const Container = styled.div`
     width:100vw;
@@ -69,14 +70,20 @@ function Login() {
   const {isFetching, error} = useSelector((state) => state.user)
 
   const navigate = useNavigate()
+  // console.log(createBrowserHistory)
+  
 
+  
   window.addEventListener("popstate", function(e){
     navigate(-2)
   })
 
-  const handleClick = (e) => {
+
+  const handleClick = async(e) => {
     e.preventDefault()
     login(dispatch, {username, password} ,navigate)
+    await new Promise((resolve) => setTimeout(resolve,1000))
+    window.location.reload()
   }
   
   return (

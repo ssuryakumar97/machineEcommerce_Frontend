@@ -50,11 +50,16 @@ const Center = styled.div`
     text-align: center;
 `
 
-const Logo = styled.h1`
+const Logo = styled.h3`
     font-weight: bold;
     ${mobile({marginLeft: "10px", fontSize : "14px"})}
 
 `
+const Image = styled.img`
+    width: 40px;
+    height: 40px;
+`
+
 const Right = styled.div`
     flex: 1;
     display: flex;
@@ -93,19 +98,21 @@ function Navbar() {
     <Container>
         <Wrapper>
             <Left>
-                <Language>EN</Language>
-                <SearchContainer>
-                    <Input placeholder='search' />
-                    <SearchIcon style={{color: "gray", fontSize: 16}}/>
-                </SearchContainer>
+                {/* <Language>EN</Language> */}
+                <Image src='/logoicon.jpg' />
+                <Logo>EULER'S 360 AUTOMATION</Logo>
             </Left>
-            <Center><Logo>EULER'S 360 AUTOMATION</Logo></Center>
+            <Center></Center>
             <Right>  
+            <LinkItem to="/">
+                    <MenuItem>HOME</MenuItem>
+                </LinkItem>
                 <LinkItem to="/register">
                     <MenuItem>REGISTER</MenuItem>
                 </LinkItem>
-                <Link to="/login"></Link>
-                <Link to=""></Link>
+                <LinkItem to="/orders">
+                <MenuItem>ORDERS</MenuItem>
+                </LinkItem>
                 
                 <MenuItem onClick={handleLoginLogout}>SIGN IN</MenuItem>
                 <MenuItem onClick={handleLoginLogout}>LOGOUT</MenuItem>
