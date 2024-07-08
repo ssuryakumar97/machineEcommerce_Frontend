@@ -4,7 +4,7 @@ import Product from "./Product"
 import { mobile } from "../responsive"
 import { useState } from "react"
 import { useEffect } from "react"
-import axios from "axios"
+import {  publicRequest } from "../requestMethods"
 
 const Container = styled.div`
     margin: 20px;
@@ -24,9 +24,9 @@ function Products({cat, filters, sort}) {
   useEffect(() => {
     const getProducts = async() => {
       try{
-        const res = await axios.get(cat ? `http://localhost:5000/api/products?category=${cat}` : "http://localhost:5000/api/products");
+        const res = await publicRequest.get(cat ? `/products?category=${cat}` : '/products');
         setProducts(res.data)
-        console.log(cat)
+        // console.log(cat)
       } catch(err){
         console.log(err)
       }
@@ -43,9 +43,7 @@ function Products({cat, filters, sort}) {
     );
   },[products,cat, filters])
 
-  console.log(filters)
-  console.log(products)
-  console.log(filteredProducts)
+  
 
   useEffect(() => {
     if(sort === "newest"){

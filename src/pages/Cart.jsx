@@ -83,12 +83,7 @@ const ProductName = styled.span``;
 
 const ProductId = styled.span``;
 
-const ProductColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-`;
+
 
 const ProductSize = styled.span``;
 
@@ -161,7 +156,7 @@ function Cart() {
   const user = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  console.log(cart);
+  // console.log(cart);
 
   const [address, setAddress] = useState("");
   const [contactNo, setContactNo] = useState("");
@@ -172,10 +167,10 @@ function Cart() {
   const estimatedShipping = Math.round(0.1 * totalPrice);
   const discount = Math.round(0.18 * totalPrice);
 
-  console.log(totalPrice);
+  // console.log(totalPrice);
 
   const handleAddItem = (product) => {
-    console.log(product);
+    // console.log(product);
     const update = cart.products.map((val) => {
       if (val._id == product._id) {
         return {
@@ -187,12 +182,12 @@ function Cart() {
         return val;
       }
     });
-    console.log(update);
+    // console.log(update);
     dispatch(updateProduct(update));
   };
 
   const handleRemoveItem = (product) => {
-    console.log(product);
+    // console.log(product);
     if (product.quantity < 2) {
       const update = cart.products.filter((val) => val._id != product._id);
       dispatch(updateProduct(update));
@@ -209,20 +204,20 @@ function Cart() {
           return val;
         }
       });
-      console.log(update);
+      // console.log(update);
       dispatch(updateProduct(update));
     }
   };
 
   const handleUpdateAddress = () => {
-    console.log(contactNo, address)
+    // console.log(contactNo, address)
     setUpdateContact({
       address,
       contactNo,
     });
   };
  
-  console.log(updateContact)
+  // console.log(updateContact)
 
   const handleCheckout = async() => {
     if(updateContact.address.length == 0 && updateContact.contactNo.length ==0){
@@ -254,10 +249,10 @@ function Cart() {
       address: updateContact.address ,
       contactNo: updateContact.contactNo,
     };
-    console.log(obj)
+    // console.log(obj)
     try {
         const order = await userRequest.post("/orders", obj)
-        console.log(order.data)
+        // console.log(order.data)
         toast.success("Your order is placed successfully")
         dispatch(deleteProduct())
     } catch (error) {

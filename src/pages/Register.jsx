@@ -3,7 +3,6 @@ import { mobile } from "../responsive"
 import { useState } from "react"
 import { publicRequest } from "../requestMethods"
 import { Link, useNavigate } from "react-router-dom"
-import { toast, ToastContainer } from "react-toastify"
 
 const Container = styled.div`
     width:100vw;
@@ -88,7 +87,7 @@ function Register() {
       setError(false)
       try {
         const handleRegister = await publicRequest.post("/auth/register", userData)
-      console.log(handleRegister.data)
+      // console.log(handleRegister.data)
       // toast.success("Data registered successfully")
       setErrorData("")
       setUserData(initialValues)
@@ -104,7 +103,7 @@ function Register() {
       setErrorData("Password doesn't match")
     }
   }
-  console.log(userData)
+  // console.log(userData)
   return (
     <Container>
       {/* <ToastContainer autoClose={2000}/> */}

@@ -72,9 +72,7 @@ const ContactItem = styled.div`
     display: flex;
     align-items: center;
 `
-const Payment = styled.img`
-    width: 50%;
-`
+
 const LinkItem = styled(Link)`
     text-decoration: none;
     color: black;

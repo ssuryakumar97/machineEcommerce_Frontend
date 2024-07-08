@@ -13,7 +13,7 @@ function CheckOut() {
                 receipt: "receipt#1"
             });
             const order = await res.data
-            console.log(order)
+            // console.log(order)
             var options = {
                 "key": "rzp_test_FdZ3cLLXw5m5Cq", // Enter the Key ID generated from the Dashboard
                 "amount": "4000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise

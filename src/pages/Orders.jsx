@@ -28,7 +28,7 @@ const OrdersDiv = styled.div`
 const Orders = () => {
     const [orders, setOrders] = useState([])
     const user = useSelector(state => state.user.currentUser)
-    console.log(user)
+    // console.log(user)
 
     useEffect(() => {
         const getOrders = async() =>{
@@ -39,7 +39,7 @@ const Orders = () => {
         getOrders()
     },[])
 
-    console.log(orders)
+    // console.log(orders)
   return (
     <div>
         <Navbar />

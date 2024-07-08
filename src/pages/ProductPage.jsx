@@ -118,24 +118,21 @@ function ProductPage() {
 
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
-    const [color, setColor] = useState("");
-    const [size, setSize] = useState("");
     const [goToCart, setGoToCart] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {products: cartProduct} = useSelector((state) => state.cart)
-    console.log(cartProduct)
+    // console.log(cartProduct)
 
     useEffect(()=>{
         const getProduct = async () => {
             try{
                 const res =await publicRequest.get("/products/find/"+id)
-                // console.log(res.data.color)
-                console.log(res.data)
+                // console.log(res.data)
                 setProduct(res.data)
                 
-            } catch{
-                
+            } catch(error){
+                console.log(error)
             }
         }
         getProduct();
@@ -150,7 +147,7 @@ function ProductPage() {
             setGoToCart(false)
         }
     },[cartProduct])
-    console.log(product)
+    // console.log(product)
 
     const handleQuantity = (type) =>{
         if(type === "dec") {

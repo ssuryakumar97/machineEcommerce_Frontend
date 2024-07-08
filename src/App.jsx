@@ -25,9 +25,9 @@ const PrivateRoute = ({isAuthenticated}) => {
 
 function App() {
   const {currentUser: user, isUserAuthenticated} = useSelector((state) => state.user);
-  console.log(user, isUserAuthenticated)
+  // console.log(user, isUserAuthenticated)
   
-console.log(user)
+// console.log(user)
   return (
    
         <Router>
@@ -40,12 +40,7 @@ console.log(user)
               <Route path="/products/:category" element={<ProductList />} />
               <Route path="/product/:id" element={<ProductPage />} />
               <Route path="/orders" element={<Orders />} />
-            </Route>
-            {/* <Route path="/" element={user ? <Navigate to="/" /> : <Login />} /> */}
-            {/* <Route path="/products/:category" element={<ProductList />} />
-            <Route path="/product/:id" element={<ProductPage />} />
-             */}
-            
+            </Route>            
             <Route path="/pay" element={<Pay/>} /> {/*stripe*/}
             <Route path="/checkout" element={<CheckOut/>} /> {/*Razor pay*/}
             <Route path="/success" element={<Success/>} />
