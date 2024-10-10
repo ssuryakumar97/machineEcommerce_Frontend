@@ -1,8 +1,11 @@
-# React + Vite
+USER CREDENTIALS:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ADMIN:
 
-Currently, two official plugins are available:
+USERNAME: surya@gmail.com PASSWORD: 12345678
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+USERNAME: kumar123 PASSWORD: 12345678
+
+USERS:
+
+USERNAME: ashkum@gmail.com PASSWORD: 12345678
